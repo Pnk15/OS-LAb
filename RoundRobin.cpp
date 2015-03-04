@@ -1,10 +1,9 @@
-// Example program
 #include <iostream>
-#include <string>
+#include<iomanip>
 
 using namespace std;
 
-int qntm = 2;
+int qntm = 0;
 int t = 0;
 
 struct process
@@ -43,18 +42,20 @@ int main()
     int n;
     process p[10],p1[100];
     int max_burst;
-    cout<<"Enter number of process: ";
+    cout<<"Enter number of process : ";
     cin>>n;
-    cout<<"Enter process data"<<endl;
+    cout<<"\nEnter arival & burst"<<endl;
   
     for(int i = 0;i<n;i++)
     {
         p[i].id = i+1;
-        cout<<"Enter arival & burst of process "<<i+1<<" : ";
+        cout<<"for process "<<i+1<<" : ";
         cin>>p[i].at>>p[i].bt;
         p[i].tbt = p[i].bt;
     }
     
+	cout<<"\nEnter Quantum : ";
+	cin>>qntm;
     max_burst = find_max(p,n);
     int c=0;
     while(p[max_burst].bt != 0)
@@ -78,15 +79,16 @@ int main()
             }
         }
     }
-    cout<<endl;
+	cout<<endl;
+	cout<<setiosflags(ios::left)<<setw(9)<<"process"<<setw(9)<<"start"<<setw(9)<<"end"<<endl;
     for(int i = 0;i<c;i++)
     {
        
         p1[i].calculate();
-        cout<<"pid: "<<p1[i].id<<" start :"<<p1[i].st<<" end :"<<p1[i].et<<endl;
+        cout<<setw(9)<<p1[i].id<<setw(9)<<p1[i].st<<setw(9)<<p1[i].et<<endl;
         
     }
-    float tWT,tTAT;
+    float tWT = 0,tTAT = 0;
     for(int i = 0;i < n;i++)
     {
     
@@ -113,12 +115,14 @@ int main()
     }
     cout<<endl;
     
-    
+	cout<<setiosflags(ios::left)<<setw(10)<<"process"<<setw(16)<<"waiting time"<<setw(16)<<"turnaround time"<<endl;
     for(int i = 0;i<n;i++)
     { 
-        cout<<"pid: "<<p[i].id<<" waiting time : "<<p[i].wt <<" turn around time : "<<p[i].tat <<endl;
+        cout<<setiosflags(ios::left)<<setw(10)<<p[i].id<<setw(16)<<p[i].wt<<setw(16)<<p[i].tat <<endl;
         
     }
-    cout<<"Average wt: "<<tWT/n<<" Average tat: "<<tTAT/n;
+    cout<<"\nAverage Waiting Time: "<<tWT/n<<",Average TurnAroundTime: "<<tTAT/n<<endl;
     
+	system("PAUSE");
+	return 0;
 }
